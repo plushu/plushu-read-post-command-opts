@@ -1,6 +1,3 @@
-#!/usr/bin/env bash
-set -eo pipefail; [[ -n "$PLUSHU_TRACE" ]] && set -x
-
 saved_args=()
 
 # While there is a first argument
