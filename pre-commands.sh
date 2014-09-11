@@ -14,13 +14,13 @@ while [[ -n "${1+x}" ]]; do case "$1" in
 
   --*)
     opt="${1%%=*}"
-    optfiles=("$PLUSHU_PLUGINS_ROOT/plugins"/*"/long-opts/${opt#--}")
+    optfiles=("$PLUSHU_PLUGINS_DIR"/*"/long-opts/${opt#--}")
     if [[ -n "${optfiles[@]}" ]]; then
       for optscript in "${optfiles[@]}"; do
-        plugin_subpath=${optscript#$PLUSHU_PLUGINS_ROOT/plugins/}
+        plugin_subpath=${optscript#$PLUSHU_PLUGINS_DIR/}
         plugin_name=${plugin_subpath%%/*}
         PLUSHU_PLUGIN_NAME="$plugin_name" \
-        PLUSHU_PLUGIN_PATH="$PLUSHU_PLUGINS_ROOT/plugins/$plugin_name" \
+        PLUSHU_PLUGIN_PATH="$PLUSHU_PLUGINS_DIR/$plugin_name" \
           source "$optscript"
       done
     else
@@ -31,13 +31,13 @@ while [[ -n "${1+x}" ]]; do case "$1" in
 
   -*)
     opt="${1:1:1}"
-    optfiles=("$PLUSHU_PLUGINS_ROOT/plugins"/*"/short-opts/$opt")
+    optfiles=("$PLUSHU_PLUGINS_DIR"/*"/short-opts/$opt")
     if [[ -n "${optfiles[@]}" ]]; then
       for optscript in "${optfiles[@]}"; do
-        plugin_subpath=${optscript#$PLUSHU_PLUGINS_ROOT/plugins/}
+        plugin_subpath=${optscript#$PLUSHU_PLUGINS_DIR/}
         plugin_name=${plugin_subpath%%/*}
         PLUSHU_PLUGIN_NAME="$plugin_name" \
-        PLUSHU_PLUGIN_PATH="$$PLUSHU_PLUGINS_ROOT/plugins/$plugin_name" \
+        PLUSHU_PLUGIN_PATH="$$PLUSHU_PLUGINS_DIR/$plugin_name" \
           source "$optscript"
       done
     else
